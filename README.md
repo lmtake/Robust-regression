@@ -16,7 +16,7 @@
 
 <body>
 
-<h1 id="robust-regression">Robust regression</h1>
+<h1 id="robust-regression(ロバスト回帰）">Robust regression</h1>
 <h2 id="データ">データ</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Davisデータ使用のため</span></span></code></pre></div>
