@@ -1,0 +1,62 @@
+---
+title: "Robust regression"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,error=FALSE,message= FALSE,warning = FALSE)
+```
+
+
+## データ
+
+
+```{r car}
+library(car)
+#Davisデータ使用のため
+```
+
+## 回帰分析
+
+単純な回帰分析
+
+```{r lm, echo=FALSE}
+a <- lm(height~weight,data=Davis);a
+```
+
+## 散布図
+
+```{r plot}
+plot(Davis$weight,Davis$height,xlab="重さ",ylab="高さ",ylim=c(100,250))
+```
+
+
+## ロバスト回帰
+
+通常の回帰を赤で、ロバスト回帰を青破線で記す
+
+```{r robust}
+library(MASS)
+b <- rlm(height~weight,data=Davis);b #ロバスト回帰
+tx <- data.frame(weight=seq(40,160,l=100))
+plot(Davis$weight,Davis$height,xlab="重さ",ylab="高さ",ylim=c(100,250))
+lines(tx$weight,predict(a,tx),col=2,lwd=1)
+lines(tx$weight,predict(b,tx),col=4,lwd=3,lty=2)
+#lwd = x:線分の幅 (line width) を番号で指定する。値が大きいほど太い線になる。
+#lty=2 or "dashed" 線分の形式 (line type) をダッシュにする．
+#col(color)の初期値は1
+#番号は 1 から順に「黒，赤，緑，青，水色，紫，黄，灰」となっている。
+
+```
+
+
+## 2重平方重み損失
+2重平方重み損失を青線で記す
+
+```{r}
+c <- rlm(height~weight,data=Davis,psi="psi.bisquare");c #2重平方重み損失
+plot(Davis$weight,Davis$height,xlab="重さ",ylab="高さ",ylim=c(100,250))
+lines(tx$weight,predict(a,tx),col=2,lwd=1)
+lines(tx$weight,predict(c,tx),col=5,lwd=1)
+```
+
